@@ -23,6 +23,7 @@
  *
  * neopixelring.c: NeoPixel Ring 12 Leds effects/driver
  */
+#define DEBUG_MODULE "EXP_NEOPIXELRING"
 
 #include "neopixelring.h"
 
@@ -38,6 +39,7 @@
 #include "param.h"
 #include "pm.h"
 #include "log.h"
+#include "debug.h"
 
 
 /*
@@ -500,6 +502,8 @@ static void neopixelringTimer(xTimerHandle timer)
 
 void neopixelringInit(void)
 {
+  DEBUG_PRINT("Initializing NeoPixel Ring\n");
+
   GPIO_InitTypeDef GPIO_InitStructure;
 
   ws2812Init();
