@@ -34,11 +34,13 @@
 
 // Definition of Vendor ID
 #define EXPBRD_VID_BITCRAZE  0xBC
+#define EXPBRD_VID_COREDUMP  0xAA
 
 // Definition of expansion board Product ID
-#define EXPBRD_PID_LEDRING  0x01
-#define EXPBRD_PID_QI       0x02
-#define EXPBRD_PID_ET       0xFF
+#define EXPBRD_PID_LEDRING     0x01
+#define EXPBRD_PID_QI          0x02
+#define EXPBRD_PID_ET          0xFF
+#define EXPBRD_PID_ULTRASONIC  0x55
 
 
 typedef struct _ExpbrdData

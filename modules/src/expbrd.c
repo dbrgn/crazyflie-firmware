@@ -35,6 +35,7 @@
 #include "crc.h"
 #include "exptest.h"
 #include "neopixelring.h"
+#include "ultrasonic.h"
 #include "imu.h"
 #include "config.h"
 
@@ -60,7 +61,16 @@ void expbrdInit()
   if (expbrdIsPresent(EXPBRD_VID_BITCRAZE, EXPBRD_PID_LEDRING))
 #endif
   {
+    DEBUG_PRINT("Neopixel Ring is present\n");
     neopixelringInit();
+  }
+
+#ifndef FORCE_EXP_DETECT
+  if (expbrdIsPresent(EXPBRD_VID_COREDUMP, EXPBRD_PID_ULTRASONIC))
+#endif
+  {
+    DEBUG_PRINT("Ultrasonic is present\n");
+    ultrasonicInit();
   }
 
   isInit = true;
@@ -108,6 +118,7 @@ static bool expbrdScan(void)
 
   for (i = 0; i < nBoards; i++)
   {
+    DEBUG_PRINT("Checking board %d\n", i);
     if (owRead(i, EXPBRD_OW_ADDR, sizeof(ExpbrdData), (uint8_t *)&expbrdData[i]))
     {
       if (expbrdIsValid(&expbrdData[i]))
@@ -163,6 +174,9 @@ static void expbrdPrintData(ExpbrdData *data)
 static bool expbrdIsPresent(uint8_t vid, uint8_t pid)
 {
   int i;
+
+  DEBUG_PRINT("Checking for expansion boards...\n");
+  DEBUG_PRINT("Number of boards: %d\n", nBoards);
 
   if (nBoards == 0)
     return false;
