@@ -1,4 +1,3 @@
-
 ^bin/dep/all
 bin/*
 .cproject
@@ -8,3 +7,9 @@ bin/*
 config.mk
 cflie.*
 version.c
+*.swp
+cf2.bin
+cf2.dfu
+cf2.elf
+cf2.hex
+cf2.map
