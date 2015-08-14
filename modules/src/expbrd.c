@@ -35,6 +35,7 @@
 #include "crc.h"
 #include "exptest.h"
 #include "neopixelring.h"
+#include "ultrasonic.h"
 #include "bigquad.h"
 #include "imu.h"
 #include "config.h"
@@ -64,9 +65,19 @@ void expbrdInit()
 #ifndef BRUSHLESS_PROTO_DECK_MAPPING
     // Can't have LED-ring and brushless breakout at the same time
     // as they share TIM3
+    DEBUG_PRINT("Neopixel Ring is present\n");
     neopixelringInit();
 #endif
   }
+
+
+#ifndef FORCE_EXP_DETECT
+  if (expbrdIsPresent(EXPBRD_VID_COREDUMP, EXPBRD_PID_ULTRASONIC))
+#endif
+  {
+    DEBUG_PRINT("Ultrasonic is present\n");
+    ultrasonicInit();
+  } 
 
   if (expbrdIsPresent(EXPBRD_VID_BITCRAZE, EXPBRD_PID_BIGQUAD))
   {
@@ -118,6 +129,7 @@ static bool expbrdScan(void)
 
   for (i = 0; i < nBoards; i++)
   {
+    DEBUG_PRINT("Checking board %d\n", i);
     if (owRead(i, EXPBRD_OW_ADDR, sizeof(ExpbrdData), (uint8_t *)&expbrdData[i]))
     {
       if (expbrdIsValid(&expbrdData[i]))
@@ -173,6 +185,9 @@ static void expbrdPrintData(ExpbrdData *data)
 static bool expbrdIsPresent(uint8_t vid, uint8_t pid)
 {
   int i;
+
+  DEBUG_PRINT("Checking for expansion boards...\n");
+  DEBUG_PRINT("Number of boards: %d\n", nBoards); 
 
   if (nBoards == 0)
     return false;

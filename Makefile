@@ -122,7 +122,7 @@ PROJ_OBJ_CF2 = platform_cf2.o
 # Drivers
 PROJ_OBJ += exti.o nvic.o motors.o
 PROJ_OBJ_CF1 += led_f103.o i2cdev_f103.o i2croutines.o adc_f103.o mpu6050.o hmc5883l.o ms5611.o nrf24l01.o eeprom.o
-PROJ_OBJ_CF2 += led_f405.o mpu6500.o i2cdev_f405.o ws2812.o lps25h.o ak8963.o eeprom.o maxsonar.o
+PROJ_OBJ_CF2 += led_f405.o mpu6500.o i2cdev_f405.o ws2812.o lps25h.o ak8963.o eeprom.o maxsonar.o hcsr04.o
 PROJ_OBJ_CF2 += uart_syslink.o swd.o uart1.o uart2.o
 # USB Files
 PROJ_OBJ_CF2 += usb_bsp.o usblink.o usbd_desc.o usb.o
@@ -143,6 +143,7 @@ PROJ_OBJ_CF2 += exptest.o
 PROJ_OBJ_CF2 += deck_constants.o
 PROJ_OBJ_CF2 += deck_digital.o
 PROJ_OBJ_CF2 += deck_analog.o
+PROJ_OBJ_CF2 += ultrasonic.o
 
 # Utilities
 PROJ_OBJ += filter.o cpuid.o cfassert.o  eprintf.o crc.o fp16.o debug.o
